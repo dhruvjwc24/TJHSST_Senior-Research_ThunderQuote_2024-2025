@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Dhruv Chandna and Luke Flecker's Senior Research Project
 
 Description:
@@ -11,3 +12,6 @@ After downloading all the files, you can go into the src folder and run the mode
 
 Notes:
 This project is still a work in progress, and a final single file for easy use is still being developed.
+=======
+Dhruv Chandna and Luke Flecker's Senior Research Project Github Repository
+>>>>>>> 1acb7bb (04.01.2025)
