@@ -1,6 +1,6 @@
 import pandas as pd
 
-file_path = 'data/combined/data_03.csv'
+file_path = 'data/combined/data_04.csv'
 data = pd.read_csv(file_path)
 
 storm_columns = data.columns[5:]

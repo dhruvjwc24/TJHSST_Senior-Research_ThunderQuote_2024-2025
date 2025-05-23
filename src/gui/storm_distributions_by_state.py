@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Load data
-df = pd.read_csv('data/combined/data_03.csv')
+df = pd.read_csv('data/combined/data_04.csv')
 
 # List of storm types to analyze
 storm_types = ['Total Storms', 'Dust', 'Flood', 'Hail', 'Hurricane', 'Heavy Rain', 'Snow', 'Thunderstorm', 'Tornado', 'Wildfire', 'Wind']

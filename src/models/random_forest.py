@@ -5,7 +5,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.metrics import mean_squared_error
 
-df = pd.read_csv('data/combined/data_03.csv')
+df = pd.read_csv('data/combined/data_04.csv')
 
 X = df.drop(columns=['Dollars Paid'])
 y = df['Dollars Paid']

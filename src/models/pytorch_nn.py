@@ -7,7 +7,7 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.metrics import mean_squared_error
 from torch.utils.data import DataLoader, TensorDataset
 
-df = pd.read_csv('data/combined/data_03.csv')
+df = pd.read_csv('data/combined/data_04.csv')
 
 X = df.drop(columns=['Dollars Paid'])
 y = df['Dollars Paid'].values
