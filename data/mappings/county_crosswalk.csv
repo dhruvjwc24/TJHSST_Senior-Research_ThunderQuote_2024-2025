@@ -1,0 +1,14 @@
+source_state,source_county,canonical_geoid,canonical_name,lsad,resolution,note
+Alaska,Wade Hampton,02158,Kusilvak Census Area,06,alias,Renamed to Kusilvak Census Area in 2015
+Iowa,OBrien,19141,O'Brien County,06,alias,Source punctuation normalized
+Maryland,Prince Georges,24033,Prince George's County,06,alias,Source punctuation normalized
+Maryland,Queen Annes,24035,Queen Anne's County,06,alias,Source punctuation normalized
+Maryland,St. Marys,24037,St. Mary's County,06,alias,Source punctuation normalized
+New Mexico,DoÃ±a Ana,35013,Doña Ana County,06,alias,Legacy source encoding normalized
+South Dakota,Shannon,46102,Oglala Lakota County,06,alias,Renamed to Oglala Lakota County in 2015
+Maryland,Baltimore,,,,withhold,Source does not distinguish Baltimore County from Baltimore city
+Missouri,St. Louis,,,,withhold,Source does not distinguish St. Louis County from St. Louis city
+Virginia,Fairfax,,,,withhold,Source does not distinguish Fairfax County from Fairfax city
+Virginia,Franklin,,,,withhold,Source does not distinguish Franklin County from Franklin city
+Virginia,Richmond,,,,withhold,Source does not distinguish Richmond County from Richmond city
+Virginia,Roanoke,,,,withhold,Source does not distinguish Roanoke County from Roanoke city

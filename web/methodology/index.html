@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="ThunderQuote data lineage, formula, limitations, and reproducibility."
+    />
+    <title>Methodology · ThunderQuote Research Explorer</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#methodology">Skip to methodology</a>
+    <header class="site-header">
+      <a
+        class="brand"
+        href="/"
+        aria-label="ThunderQuote Research Explorer home"
+      >
+        <span class="brand-mark" aria-hidden="true">TQ</span>
+        <span
+          ><strong>ThunderQuote</strong><small>Research Explorer</small></span
+        >
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="/">Explorer</a>
+        <a aria-current="page" href="/methodology/">Methodology</a>
+      </nav>
+    </header>
+    <main id="methodology" class="methodology-layout">
+      <aside class="methodology-nav" aria-label="On this page">
+        <p class="eyebrow">On this page</p>
+        <a href="#purpose">Purpose</a>
+        <a href="#lineage">Data lineage</a>
+        <a href="#formula">Index definition</a>
+        <a href="#geography">Geography</a>
+        <a href="#limitations">Limitations</a>
+        <a href="#reproduce">Reproduce</a>
+      </aside>
+      <article class="methodology-copy">
+        <p class="eyebrow">Open methodology · versioned with the app</p>
+        <h1>How the research explorer works</h1>
+        <div class="trust-card">
+          <strong>Synthetic research simulator, not an insurance quote.</strong>
+          <p>
+            This site explains a student research artifact. It does not estimate
+            loss probability, property safety, financial value, or an amount
+            anyone should pay.
+          </p>
+        </div>
+
+        <section id="purpose">
+          <h2>Purpose</h2>
+          <p>
+            ThunderQuote Research Explorer makes a legacy senior-research
+            dataset inspectable. It preserves the original geography and
+            generated-event workflow while replacing an unsupported dollar
+            result with a dimensionless scenario index. The goal is
+            transparency: a reviewer can see the inputs, formula version, data
+            period, and exact artifact identity.
+          </p>
+        </section>
+
+        <section id="lineage">
+          <h2>Data lineage</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Field</th>
+                  <th>Lineage</th>
+                  <th>Public use</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>State/county boundaries</td>
+                  <td>2018 U.S. Census cartographic boundary shapefiles</td>
+                  <td>Map geometry and canonical GEOIDs</td>
+                </tr>
+                <tr>
+                  <td>Generated claims</td>
+                  <td>
+                    Legacy unseeded simulation committed in
+                    <code>data_04.csv</code>
+                  </td>
+                  <td>Annualized, normalized input</td>
+                </tr>
+                <tr>
+                  <td>Generated storms</td>
+                  <td>
+                    Legacy unseeded simulation committed in
+                    <code>data_04.csv</code>
+                  </td>
+                  <td>Annualized, normalized input</td>
+                </tr>
+                <tr>
+                  <td>Dollar-valued source field</td>
+                  <td>Legacy random generation</td>
+                  <td>Excluded from browser artifacts and the index</td>
+                </tr>
+                <tr>
+                  <td>Property factors</td>
+                  <td>Hand-authored classroom assumptions</td>
+                  <td>
+                    Explicit scenario multipliers, not fitted coefficients
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The frozen source checksum is
+            <code
+              >4093e523e84c9908aed438a637fda1aaebecdc439fca8bbd5540688dfa4eda13</code
+            >. The production packager never reruns the random generator.
+          </p>
+        </section>
+
+        <section id="formula">
+          <h2>Illustrative Scenario Index</h2>
+          <p>
+            For each county, generated claims and generated storms are summed
+            over 1980–2023 and divided by 44. The neutral county score is 60% of
+            its claims rate relative to the national county median plus 40% of
+            its storm rate relative to that median. The score is multiplied by
+            the visible scenario factors and shown relative to 100. It is not
+            clamped into a severity band.
+          </p>
+          <pre><code>base = 0.6 × claims_rate / median_claims_rate
+     + 0.4 × storms_rate / median_storms_rate
+
+index = round_half_away_from_zero(100 × base × scenario_multiplier, 1)</code></pre>
+          <p>
+            A value of 100 means the generated county inputs and selected factor
+            product align with the formula's reference. It does not mean average
+            real-world risk. Every coefficient is published in the deployed
+            <code>formula.json</code> file and copied into the research record
+            export.
+          </p>
+        </section>
+
+        <section id="geography">
+          <h2>Geography coverage</h2>
+          <p>
+            The frozen source covers 50 states. The build joins names to Census
+            GEOIDs, resolves seven reviewed historical/punctuation aliases, and
+            withholds six source keys that do not distinguish a county from an
+            independent city: Baltimore, St. Louis, Fairfax, Franklin, Richmond,
+            and Roanoke. Those geometries remain visible as unavailable. DC and
+            territories are outside the source coverage.
+          </p>
+        </section>
+
+        <section id="limitations">
+          <h2>Limitations and prohibited uses</h2>
+          <ul>
+            <li>
+              The event values were generated with an unseeded random process
+              and are not observations.
+            </li>
+            <li>
+              The scenario coefficients were not trained, calibrated, or
+              validated against outcomes.
+            </li>
+            <li>
+              No exposure denominator, uncertainty interval, actuarial
+              validation, or fairness evaluation exists.
+            </li>
+            <li>
+              Do not use the site for insurance, underwriting, lending,
+              purchasing, pricing, or safety decisions.
+            </li>
+            <li>
+              The repository does not yet state redistribution rights or a
+              software license; public production promotion requires owner
+              review.
+            </li>
+          </ul>
+        </section>
+
+        <section id="reproduce">
+          <h2>Reproduce a result</h2>
+          <ol>
+            <li>
+              Use the explorer's “Download JSON” action after selecting a county
+              and scenario.
+            </li>
+            <li>
+              Match its dataset ID and formula version to the values below.
+            </li>
+            <li>
+              Run <code>npm ci</code> and <code>npm run check</code> from an
+              existing checkout.
+            </li>
+            <li>
+              Maintainers can rebuild frozen artifacts with the separately
+              pinned Python environment and
+              <code>npm run artifacts:build</code>.
+            </li>
+          </ol>
+          <dl class="version-grid">
+            <div>
+              <dt>Dataset</dt>
+              <dd><code id="method-dataset">loading</code></dd>
+            </div>
+            <div>
+              <dt>Formula</dt>
+              <dd><code id="method-formula">loading</code></dd>
+            </div>
+            <div>
+              <dt>Period</dt>
+              <dd id="method-period">1980–2023</dd>
+            </div>
+            <div>
+              <dt>Published counties</dt>
+              <dd id="method-counties">loading</dd>
+            </div>
+          </dl>
+        </section>
+        <a class="button" href="/">Return to explorer</a>
+      </article>
+    </main>
+    <footer>
+      <p>Dhruv Chandna and Luke Flecker · Senior Research Project</p>
+      <p>
+        Static, browser-only explorer. Scenario inputs are not sent to a server.
+      </p>
+    </footer>
+    <script type="module" src="/src/methodology.js"></script>
+  </body>
+</html>

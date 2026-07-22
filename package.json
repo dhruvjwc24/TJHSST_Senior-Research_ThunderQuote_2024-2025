@@ -1,0 +1,33 @@
+{
+  "name": "thunderquote-research-explorer",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "vite --config vite.config.js",
+    "build": "vite build --config vite.config.js",
+    "preview": "vite preview --config vite.config.js",
+    "test": "vitest run --config vitest.config.js",
+    "test:e2e": "playwright test",
+    "lint": "eslint web tests vite.config.js vitest.config.js eslint.config.js playwright.config.js",
+    "format:check": "prettier --check web tests scripts package.json vite.config.js vitest.config.js eslint.config.js playwright.config.js",
+    "artifacts:build": "python3 scripts/build_runtime_data.py",
+    "artifacts:verify": "python3 scripts/verify_runtime_data.py",
+    "language:check": "node scripts/check_public_language.js",
+    "check": "npm run format:check && npm run lint && npm run test && npm run artifacts:verify && npm run language:check && npm run build"
+  },
+  "dependencies": {
+    "d3-geo": "3.1.1"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.12.1",
+    "@playwright/test": "1.61.1",
+    "eslint": "10.7.0",
+    "prettier": "3.9.6",
+    "vite": "8.1.5",
+    "vitest": "4.1.10"
+  }
+}

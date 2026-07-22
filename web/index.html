@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Explore a transparent synthetic research dataset and deterministic scenario index."
+    />
+    <title>ThunderQuote Research Explorer</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#explorer">Skip to explorer</a>
+    <header class="site-header">
+      <a
+        class="brand"
+        href="/"
+        aria-label="ThunderQuote Research Explorer home"
+      >
+        <span class="brand-mark" aria-hidden="true">TQ</span>
+        <span
+          ><strong>ThunderQuote</strong><small>Research Explorer</small></span
+        >
+      </a>
+      <nav aria-label="Primary navigation">
+        <a aria-current="page" href="/">Explorer</a>
+        <a href="/methodology/">Methodology</a>
+      </nav>
+    </header>
+
+    <main id="explorer">
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">TJHSST senior research · 2024–2025</p>
+          <h1 id="page-title">
+            Explore how generated assumptions move a synthetic index.
+          </h1>
+          <p class="hero-copy">
+            Select a state and county, then adjust a small scenario. Every value
+            is traceable to the frozen research artifact and a public formula.
+          </p>
+        </div>
+        <aside class="trust-card" aria-label="Important limitation">
+          <strong>Synthetic research simulator, not an insurance quote.</strong>
+          <p>
+            Generated values are for classroom and reproducibility use only. Do
+            not use them for insurance, lending, purchasing, underwriting, or
+            safety decisions.
+          </p>
+          <a href="/methodology/#limitations">Read limitations</a>
+        </aside>
+      </section>
+
+      <div id="app-status" class="status" role="status" aria-live="polite">
+        Loading the versioned research dataset…
+      </div>
+
+      <section class="workspace" aria-label="Research explorer">
+        <div class="map-panel panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Geography</p>
+              <h2 id="map-title">United States</h2>
+            </div>
+            <button
+              id="back-button"
+              class="button button-secondary"
+              type="button"
+              hidden
+            >
+              Back to U.S.
+            </button>
+          </div>
+          <div id="map" class="map" aria-labelledby="map-title"></div>
+          <div class="legend" aria-label="Map legend">
+            <span>Lower relative value</span
+            ><span class="legend-ramp" aria-hidden="true"></span
+            ><span>Higher relative value</span>
+          </div>
+          <p class="map-note">
+            The selectors provide the same navigation as the map and are the
+            recommended keyboard path.
+          </p>
+        </div>
+
+        <aside
+          class="control-panel panel"
+          aria-label="Selection and scenario controls"
+        >
+          <section aria-labelledby="selection-title">
+            <p class="step-label">01 · Choose a place</p>
+            <h2 id="selection-title">Research geography</h2>
+            <div class="field-row">
+              <label for="state-select">State</label>
+              <select id="state-select">
+                <option value="">Choose a state</option>
+              </select>
+            </div>
+            <div class="field-row">
+              <label for="county-select">County or equivalent</label>
+              <select id="county-select" disabled>
+                <option value="">Choose a state first</option>
+              </select>
+            </div>
+            <div id="place-summary" class="data-card" hidden>
+              <p class="eyebrow">Generated annual averages · 1980–2023</p>
+              <h3 id="place-name"></h3>
+              <dl>
+                <div>
+                  <dt>Generated claims</dt>
+                  <dd id="claims-value">—</dd>
+                </div>
+                <div>
+                  <dt>Generated storms</dt>
+                  <dd id="storms-value">—</dd>
+                </div>
+              </dl>
+            </div>
+          </section>
+
+          <section id="scenario-section" aria-labelledby="scenario-title">
+            <p class="step-label">02 · Adjust assumptions</p>
+            <div class="section-title-row">
+              <h2 id="scenario-title">Scenario</h2>
+              <select id="preset-select" aria-label="Scenario preset">
+                <option value="neutral">Neutral preset</option>
+                <option value="resilient">Lower-factor example</option>
+                <option value="stress">Higher-factor example</option>
+              </select>
+            </div>
+            <form id="scenario-form" novalidate>
+              <div class="form-grid">
+                <div class="field-row">
+                  <label for="year-built">Year built</label>
+                  <input
+                    id="year-built"
+                    name="year_built"
+                    type="number"
+                    min="1900"
+                    max="2026"
+                  />
+                </div>
+                <div class="field-row">
+                  <label for="stories">Stories</label>
+                  <select id="stories" name="stories">
+                    <option value="1">1 story</option>
+                    <option value="2">2 stories</option>
+                    <option value="3+">3+ stories</option>
+                  </select>
+                </div>
+                <div class="field-row">
+                  <label for="square-feet">Square feet</label>
+                  <input
+                    id="square-feet"
+                    name="square_feet"
+                    type="number"
+                    min="200"
+                    max="20000"
+                  />
+                </div>
+                <div class="field-row">
+                  <label for="roof-age">Roof age</label>
+                  <input
+                    id="roof-age"
+                    name="roof_age"
+                    type="number"
+                    min="0"
+                    max="100"
+                  />
+                </div>
+                <div class="field-row">
+                  <label for="primary-residence">Primary residence</label>
+                  <select id="primary-residence" name="primary_residence">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                  </select>
+                </div>
+                <fieldset>
+                  <legend>Protective devices</legend>
+                  <label class="check"
+                    ><input type="checkbox" name="devices" value="alarm" />
+                    Alarm</label
+                  >
+                  <label class="check"
+                    ><input type="checkbox" name="devices" value="sprinklers" />
+                    Sprinklers</label
+                  >
+                  <label class="check"
+                    ><input type="checkbox" name="devices" value="generator" />
+                    Generator</label
+                  >
+                </fieldset>
+              </div>
+            </form>
+          </section>
+
+          <section
+            id="result-card"
+            class="result-card"
+            aria-labelledby="result-title"
+          >
+            <p class="step-label">03 · Inspect the result</p>
+            <h2 id="result-title">Illustrative Scenario Index</h2>
+            <div class="result-value" id="result-value">—</div>
+            <p id="result-explanation">
+              Choose a county to calculate a result.
+            </p>
+            <div
+              id="validation-error"
+              class="inline-error"
+              role="alert"
+              hidden
+            ></div>
+            <details>
+              <summary>Factor breakdown</summary>
+              <dl id="factor-list" class="factor-list"></dl>
+            </details>
+            <div class="button-row">
+              <button id="copy-button" class="button" type="button" disabled>
+                Copy research record
+              </button>
+              <button
+                id="download-button"
+                class="button button-secondary"
+                type="button"
+                disabled
+              >
+                Download JSON
+              </button>
+            </div>
+            <textarea
+              id="export-fallback"
+              class="export-fallback"
+              aria-label="Research record JSON"
+              readonly
+              hidden
+            ></textarea>
+          </section>
+        </aside>
+      </section>
+
+      <section class="provenance-strip" aria-labelledby="provenance-title">
+        <div>
+          <p class="eyebrow">Data &amp; reproducibility</p>
+          <h2 id="provenance-title">Know exactly what you are looking at.</h2>
+        </div>
+        <dl>
+          <div>
+            <dt>Data period</dt>
+            <dd id="data-period">1980–2023</dd>
+          </div>
+          <div>
+            <dt>Dataset</dt>
+            <dd><code id="dataset-id">loading</code></dd>
+          </div>
+          <div>
+            <dt>Formula</dt>
+            <dd><code id="formula-version">loading</code></dd>
+          </div>
+        </dl>
+        <a class="button button-secondary" href="/methodology/"
+          >Open methodology</a
+        >
+      </section>
+    </main>
+
+    <footer>
+      <p>Dhruv Chandna and Luke Flecker · Senior Research Project</p>
+      <p>
+        Static, browser-only explorer. Scenario inputs are not sent to a server.
+      </p>
+    </footer>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

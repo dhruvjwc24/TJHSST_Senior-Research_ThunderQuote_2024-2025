@@ -1,0 +1,8 @@
+/*
+!/package.json
+!/package-lock.json
+!/.nvmrc
+!/vite.config.js
+!/vercel.json
+!/web
+!/web/**
